@@ -237,7 +237,7 @@ def train_PG(exp_name='',
     # Tensorflow Engineering: Config, Session, Variable initialization
     #========================================================================================#
 
-    tf_config = tf.ConfigProto(inter_op_parallelism_threads=1, intra_op_parallelism_threads=1) 
+    tf_config = tf.ConfigProto(inter_op_parallelism_threads=1, intra_op_parallelism_threads=1, per_process_gpu_memory_fraction=0.5)
 
     sess = tf.Session(config=tf_config)
     sess.__enter__() # equivalent to `with sess:`

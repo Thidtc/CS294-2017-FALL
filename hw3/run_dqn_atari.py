@@ -68,10 +68,10 @@ def atari_learn(env,
         exploration=exploration_schedule,
         stopping_criterion=stopping_criterion,
         replay_buffer_size=1000000,
-        batch_size=32,
+        batch_size=128,
         gamma=0.99,
         learning_starts=50000,
-        learning_freq=4,
+        learning_freq=2,
         frame_history_len=4,
         target_update_freq=10000,
         grad_norm_clipping=10
@@ -97,7 +97,8 @@ def get_session():
     tf.reset_default_graph()
     tf_config = tf.ConfigProto(
         inter_op_parallelism_threads=1,
-        intra_op_parallelism_threads=1)
+        intra_op_parallelism_threads=1,
+        gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.2))
     session = tf.Session(config=tf_config)
     print("AVAILABLE GPUS: ", get_available_gpus())
     return session
